@@ -1,20 +1,20 @@
 package monkeys.engine;
 
-import javax.ejb.LocalBean;
-import javax.ejb.Stateless;
+import javax.ejb.Stateful;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 /**
  * Session Bean implementation class MonkeyIslandBean
  */
-@Stateless
-@LocalBean
+@Stateful
 public class MonkeyIslandBean implements RemoteMonkeyIsland {
-
+	@PersistenceContext(unitName="MonkeysDS")
+	EntityManager manager;
     /**
      * Default constructor. 
      */
     public MonkeyIslandBean() {
-        // TODO Auto-generated constructor stub
     }
 
 }
