@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 
 import javax.annotation.Resource;
-import javax.ejb.Stateful;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.jms.JMSContext;
 import javax.jms.JMSException;
@@ -21,7 +21,7 @@ import monkeys.model.Treasure;
 /**
  * Session Bean implementation class CommunicationBean
  */
-@Stateful
+@Stateless
 public class CommunicationBean implements RemoteCommunication {
 	
 	@Inject
@@ -30,7 +30,7 @@ public class CommunicationBean implements RemoteCommunication {
 	@Resource(mappedName = "java:jboss/exported/jms/topic/monkeys")
     private Topic topic;
 	
-	@Resource(name="ejb:/CommunicationServer/CommunicationBean!monkeys.communication.RemoteCommunication")
+	@Resource(name="ejb:/EntityManagerServer/MonkeyIslandBean!monkeys.engine.RemoteMonkeyIsland?stateful")
 	RemoteMonkeyIsland rMI;
 	
     /**

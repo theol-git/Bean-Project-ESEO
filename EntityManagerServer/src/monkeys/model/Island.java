@@ -40,4 +40,8 @@ public class Island implements Serializable {
 	public int[][] getCells() {
 		return cells;
 	}
+	
+	public void setCells(int[][] cells) {
+		this.cells = cells;
+	}
 }

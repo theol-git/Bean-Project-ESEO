@@ -21,6 +21,10 @@ import guybrush.view.Fenetre;
 import guybrush.view.GameObserver;
 import monkeys.manager.RemotePlayerManager;
 import monkeys.model.Island;
+import monkeys.model.Monkey;
+import monkeys.model.Pirate;
+import monkeys.model.RumBottle;
+import monkeys.model.Treasure;
 
 public class MonkeyClient implements MessageListener, GameObserver {
 	public TopicConnection connection;
@@ -98,8 +102,13 @@ public class MonkeyClient implements MessageListener, GameObserver {
 
 	@Override
 	public void notifyDisconnect() {
-		// TODO Auto-generated method stub
+		try {
+			this.connection.close();
+			System.exit(0);
 		
+		} catch (JMSException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -112,13 +121,49 @@ public class MonkeyClient implements MessageListener, GameObserver {
 	public void onMessage(Message message) {
 		System.out.println("You've got a new message :)");
 		try {
+			ObjectMessage om = (ObjectMessage) message;
 			switch(message.getJMSType()){
 				case "map" :
-					ObjectMessage sm = (ObjectMessage) message;
-					Island map = (Island)sm.getObject();
+					System.out.println("map");
+					Island map = (Island)om.getObject();
 					fenetre.creationCarte(map.getCells());
 					fenetre.getEnergyView().setEnergieMax(10);
 					fenetre.updateEnergieView(10);
+					break;
+				case "monkeys":
+					System.out.println("monkeys");
+					Monkey[] monkeys = (Monkey[])om.getObject();
+					for (Monkey m : monkeys) {
+						fenetre.creationEMonkey(m.getId(), m.getX(), m.getY());
+					}
+					break;
+				case "treasure":
+					System.out.println("treasure");
+					Treasure treasure = (Treasure)om.getObject();
+					fenetre.creationTresor(treasure.getX(), treasure.getY(), treasure.isVisible());
+					break;
+				case "bottles":
+					System.out.println("bottles");
+					RumBottle[] bottles = (RumBottle[])om.getObject();
+					for (RumBottle b : bottles) {
+						fenetre.creationRhum(b.getX(), b.getY(), b.isVisible());
+					}
+					break;
+				case "pirates":
+					System.out.println("pirates");
+					Pirate[] pirates = (Pirate[])om.getObject();
+					for (Pirate p : pirates) {
+						fenetre.ajoutPirate(p.getId(), p.getX(), p.getY(), "Test", 100);
+					}
+					break;
+				case "updatePirate":
+					System.out.println("update pirate");
+					Pirate p = (Pirate)om.getObject();
+					fenetre.suppressionPirate(p.getId());
+					fenetre.ajoutPirate(p.getId(), p.getX(), p.getY(), "Test", 100);
+					break;
+				case "updateBotlle":
+					System.out.println("update bottle");
 					break;
 				default: break;
 			}

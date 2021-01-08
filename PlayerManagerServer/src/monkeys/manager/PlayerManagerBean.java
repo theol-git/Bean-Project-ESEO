@@ -4,6 +4,7 @@ import javax.annotation.Resource;
 import javax.ejb.Stateful;
 
 import monkeys.communication.RemoteCommunication;
+import monkeys.engine.RemoteMonkeyIsland;
 
 /**
  * Session Bean implementation class PlayerManagerBean
@@ -13,8 +14,8 @@ public class PlayerManagerBean implements RemotePlayerManager {
 	
 	@Resource(name="ejb:/CommunicationServer/CommunicationBean!monkeys.communication.RemoteCommunication")
 	RemoteCommunication comm;
-//	@Resource(name="ejb:/CommunicationServer/CommunicationBean!monkeys.communication.RemoteCommunication")
-//	RemoteMonkeyIsland rMI;
+	@Resource(name="ejb:/EntityManagerServer/MonkeyIslandBean!monkeys.engine.RemoteMonkeyIsland?stateful")
+	RemoteMonkeyIsland rMI;
     /**
      * Default constructor. 
      */
@@ -34,13 +35,12 @@ public class PlayerManagerBean implements RemotePlayerManager {
 	}
 
 	@Override
-	public void move(String move) {
-		// TODO Auto-generated method stub
+	public void move(String id, String move) {
 		// TODO Appel à l'application
 	}
 	
 	private void addPlayer(String id) {
-		//rMI.createMap();
+		rMI.createMap();
 		//comm.sendIsland(null,"myMI");
 		// TODO add player rMI
 	}

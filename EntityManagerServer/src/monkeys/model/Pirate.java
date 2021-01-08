@@ -13,8 +13,13 @@ public class Pirate implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private int id;
+	public int x;
+	public int y;
 
-	public Pirate() {}
+	public Pirate(int x, int y) {
+		this.x = x;
+		this.y = y;
+	}
 
 	/**
 	 * @return the id
@@ -30,6 +35,22 @@ public class Pirate implements Serializable {
 	 */
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	public int getX() {
+		return this.x;
+	}
+	
+	public int getY() {
+		return this.y;
+	}
+	
+	public void setX(int x) {
+		this.x = x;
+	}
+	
+	public void setY(int y) {
+		this.y = y;
 	}
 	
 }

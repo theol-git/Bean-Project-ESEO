@@ -14,8 +14,16 @@ public class RumBottle implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private int id;
 	private Island map;
+	public int x;
+	public int y;
+	public boolean isVisible;
 
-	public RumBottle() {}
+	public RumBottle(Island map, int x, int y, boolean isVisible) {
+		this.setMap(map);
+		this.x = x;
+		this.y = y;
+		this.isVisible = isVisible;
+	}
 
 	/**
 	 * @return the id
@@ -39,5 +47,29 @@ public class RumBottle implements Serializable{
 	
 	public Island getMap() {
 		return map;
+	}
+	
+	public int getX() {
+		return this.x;
+	}
+	
+	public int getY() {
+		return this.y;
+	}
+	
+	public void setX(int x) {
+		this.x = x;
+	}
+	
+	public void setY(int y) {
+		this.y = y;
+	}
+	
+	public boolean isVisible() {
+		return this.isVisible;
+	}
+	
+	public void setVisible(boolean isVisile) {
+		this.isVisible = isVisile;
 	}
 }

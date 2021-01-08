@@ -9,5 +9,5 @@ public interface RemotePlayerManager {
 	
 	public void quit(String id);
 	
-	public void move(String move);	
+	public void move(String id, String move);	
 }

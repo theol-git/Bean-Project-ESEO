@@ -14,8 +14,16 @@ public class Treasure implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private int id;
 	private Island map;
+	public int x;
+	public int y;
+	public boolean isVisible;
 
-	public Treasure() {}
+	public Treasure(Island map, int x, int y, boolean isVisible) {
+		this.setMap(map);
+		this.x = x;
+		this.y = y;
+		this.isVisible = isVisible;
+	}
 
 	/**
 	 * @return the id
@@ -23,7 +31,7 @@ public class Treasure implements Serializable {
 	@Id
 	@GeneratedValue
 	public int getId() {
-		return id;
+		return this.id;
 	}
 
 	/**
@@ -38,6 +46,30 @@ public class Treasure implements Serializable {
 	}
 	
 	public Island getMap() {
-		return map;
+		return this.map;
+	}
+	
+	public int getX() {
+		return this.x;
+	}
+	
+	public int getY() {
+		return this.y;
+	}
+	
+	public void setX(int x) {
+		this.x = x;
+	}
+	
+	public void setY(int y) {
+		this.y = y;
+	}
+	
+	public boolean isVisible() {
+		return this.isVisible;
+	}
+	
+	public void setVisible(boolean isVisible) {
+		this.isVisible = isVisible;
 	}
 }
