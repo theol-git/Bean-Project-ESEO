@@ -18,7 +18,15 @@ Pour se faire, CLique droit > New > Server > Sélectionner WildFly 21 (laisser l
 
 Il faut désormais configurer le serveur correctement. Nous avions essayé de mettre le serveur dans un github pour pouvoir le préconfigurer et juste vous le fournir mais cela n'a pas fonctionné comme espéré. Il faut donc ajouter les utilisateurs manager/jboss et user/jboss au serveur, <b> l'utilisateur user/jboss dans le groupe "guest" </b>.<br/>
 Une fois fait vous pouvez lancer le serveur. Il va falloir maintenant configurer une <b> source de données </b> et un <b> topic </b> comme vu en TPs.<br/>
-TODO
+
+<b> Source de données :</b><br/>
+Lancer le serveur via Eclipse > allez sur localhost:9990 et connectez-vous avec l'utilisateur manager/jboss.<br/>
+Dans l'onglet "Configuration" allez dans "Subsystems" > "Datasources & Drivers" > "Datasources" > "+" Add datasource<br/>
+Sélectionnez comme configs : H2, next > Name: "MonkeysDS", JNDI : "java:jboss/datasources/MonkeysDS", next > next > JDBC Url : jdbc:h2:tcp://localhost:9092/./h2db/ejava;DB_CLOSE_DELAY=-1, url qui doit correspondre à celui indiqué lorsque vous executez le .jar dans "wildfly-21.0.0.Final\modules\system\layers\base\com\h2database\h2\main" pour lancer la datasource. Laissez également les informations de connexion à sa/sa. > Next > Test Connection, cela doit s'afficher en vert, si non pensez à bien démarrer la database h2 via le jar exécutable dans le lien précédent. > Finish<br/>
+
+<b> Topic :</b><br/>
+Toujours dans l'onglet "Configuration" du serveur, allez dans "Subsystems" > Messaging > Server > Default > Destionations > View<br/>
+Allez ensuite dans "JMS Topic" > "Add" > Name: monkeysTopic, Entries : java:jboss/exported/topic/monkeys et java:jboss/exported/jms/topic/monkeys > "Save" > Reload server
 
 # Étape 2 - Importer tous les .war
   Récupérer dans l'archive fournie tous les .war et .jar et les importer dans éclipse JEE. Il devrait y avoir :<br/>
