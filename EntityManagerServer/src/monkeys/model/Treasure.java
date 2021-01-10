@@ -2,9 +2,12 @@ package monkeys.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Treasure implements Serializable {
@@ -40,7 +43,10 @@ public class Treasure implements Serializable {
 	public void setId(int id) {
 		this.id = id;
 	}
-
+	
+	@OneToOne
+	@Lob
+	@Column(length = 100000)
 	public void setMap(Island map) {
 		this.map = map;
 	}

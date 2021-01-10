@@ -7,6 +7,7 @@ import javax.persistence.PersistenceContext;
 
 import monkeys.communication.RemoteCommunication;
 import monkeys.model.Island;
+import monkeys.model.Treasure;
 
 /**
  * Session Bean implementation class MonkeyIslandBean
@@ -30,10 +31,17 @@ public class MonkeyIslandBean implements RemoteMonkeyIsland {
 	@Override
 	public void createMap() {
 		Island map = new Island();
-		int[][] cells = {{0,0,0,0},{0,1,1,0},{0,1,1,0},{0,0,0,0}};
+		int[][] cells = {{0,0,0,0,0},
+						 {0,1,1,1,0},
+						 {0,1,0,1,0},
+						 {0,1,1,1,0},
+						 {0,0,0,0,0}};
 		map.setCells(cells);
 		manager.persist(map);
 		comm.sendIsland(map);
+		Treasure treasure = new Treasure(map, 1, 1, true);
+		manager.persist(treasure);
+		comm.sendTreasure(treasure);
 	}
 	@Override
 	public void move(String id, String move) {

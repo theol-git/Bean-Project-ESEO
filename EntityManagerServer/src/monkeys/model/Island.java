@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 
 @Entity
 public class Island implements Serializable {
@@ -36,7 +37,8 @@ public class Island implements Serializable {
 		this.id = id;
 	}
 	
-	@Column(length = 10000)
+	@Lob
+	@Column(length = 100000)
 	public int[][] getCells() {
 		return cells;
 	}
