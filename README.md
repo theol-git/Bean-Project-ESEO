@@ -34,7 +34,7 @@ Le serveur est désormais prêt et configuré.
 Récupérer dans l'archive fournie tous les .war et .jar et les importer dans éclipse JEE. Il devrait y avoir :<br/>
             - 6 projets : 5 pour l'application et 1 client (3 .war et 3 .jar)<br/>
             /!\ Pour les . war utilisez l'import WAR File, pour le client utilisez l'import App Client Jar, et pour les 2 jar restant utilisez l'import EJB jar /!\ <br/>
-            /!\ Pour le projet MonkeyClient, une fois importé il y aura peut être encore des erreurs, il faut penser à ajouter au Build Path du projet la librairie jboss-client.jar qui se trouve dans le dossier du serveur WildFly > bin > client. Il se peut également qu'il faille ajouter la dépendance vers les autres projets "serveur" s'ils n'ont pas été ajoutés avec des .jar/!\ <br/>
+            /!\ Pour le projet MonkeyClient, une fois importé il y aura peut être encore des erreurs, il faut penser à <b>ajouter au Build Path du projet la librairie jboss-client.jar qui se trouve dans le dossier du serveur WildFly > bin > client</b>. Il faudra également ajouter au Build Path les librairies présente en interne dans <b>appClientModule > META-INF > libs via l'onglet "Add JARS" du Build Path </b> Il se peut également qu'il faille ajouter la dépendance vers les autres projets "serveur" s'ils n'ont pas été ajoutés avec des .jar/!\ <br/>
  S'il y a des erreurs, pensez à ajouter au buildpath de chaque projet la librairie WildFly 21 Runtime. Clic droit sur le projet > Configure Build Path > Libraires > Cliquez sur "Add Library" > Sélectionner "Server Runtime" > Puis votre runtime > Finish et actualisez et CTRL + Maj + O dans chaque projet pour réorganiser les imports.<br/>
 
 Enfin, pensez à ajouter les projets au serveur, sauf le client.
