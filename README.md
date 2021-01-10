@@ -17,6 +17,7 @@ Pour se faire, CLique droit > New > Server > Sélectionner WildFly 21 (laisser l
 # Étape 1 - Importer tous les .war
   Récupérer dans l'archive fournie tous les .war et .jar et les importer dans éclipse JEE. Il devrait y avoir :<br/>
             - 6 projets : 5 pour l'application et 1 client (3 .war et 3 .jar)<br/>
-            /!\ Pour les . war utilisez l'import WAR File, pour le client utilisez l'import App Client Jar, et pour les 2 jar restants utilisez l'import EJB jar /!\
+            /!\ Pour les . war utilisez l'import WAR File, pour le client utilisez l'import App Client Jar, et pour les 2 jar restants utilisez l'import EJB jar /!\<br/>
+            /!\ Pour le projet MonkeyClient, une fois importé il y aura peut être encore des erreurs, il faut penser à ajouter au Build Path du projet la librairie jboss-client.jar qui se trouve dans le dossier du serveur WildFly > bin > client. /!\<br/>
  S'il y a des erreurs, pensez à ajouter au buildpath de chaque projet la librairie WildFly 21 Runtime. Clique droit sur le projet > Configure Build Path > Libraires > Cliquez sur "Add Library" > Sélectionner "Server Runtime" > Puis votre runtime > Finish et actualisez et CTRL + Maj + O dans chaque projet pour réorganiser les imports<br/>
  
