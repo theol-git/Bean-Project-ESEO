@@ -26,13 +26,19 @@ Sélectionnez comme configs : H2, next > Name: "MonkeysDS", JNDI : "java:jboss/d
 
 <b> Topic :</b><br/>
 Toujours dans l'onglet "Configuration" du serveur, allez dans "Subsystems" > Messaging > Server > Default > Destionations > View<br/>
-Allez ensuite dans "JMS Topic" > "Add" > Name: monkeysTopic, Entries : java:jboss/exported/topic/monkeys et java:jboss/exported/jms/topic/monkeys > "Save" > Reload server
+Allez ensuite dans "JMS Topic" > "Add" > Name: monkeysTopic, Entries : java:jboss/exported/topic/monkeys et java:jboss/exported/jms/topic/monkeys > "Save" > Reload server<br>
+
+Le serveur est désormais prêt et configuré.
 
 # Étape 2 - Importer tous les .war
-  Récupérer dans l'archive fournie tous les .war et .jar et les importer dans éclipse JEE. Il devrait y avoir :<br/>
+Récupérer dans l'archive fournie tous les .war et .jar et les importer dans éclipse JEE. Il devrait y avoir :<br/>
             - 6 projets : 5 pour l'application et 1 client (3 .war et 3 .jar)<br/>
             /!\ Pour les . war utilisez l'import WAR File, pour le client utilisez l'import App Client Jar, et pour les 2 jar restants utilisez l'import EJB jar /!\<br/>
             /!\ Pour le projet MonkeyClient, une fois importé il y aura peut être encore des erreurs, il faut penser à ajouter au Build Path du projet la librairie jboss-client.jar qui se trouve dans le dossier du serveur WildFly > bin > client. Il se peut également qu'il faille ajouter la dépendance vers les autres projets "serveur" s'ils n'ont pas été ajouté avec des .jar/!\<br/>
  S'il y a des erreurs, pensez à ajouter au buildpath de chaque projet la librairie WildFly 21 Runtime. Clique droit sur le projet > Configure Build Path > Libraires > Cliquez sur "Add Library" > Sélectionner "Server Runtime" > Puis votre runtime > Finish et actualisez et CTRL + Maj + O dans chaque projet pour réorganiser les imports<br/>
 
+Enfin, pensez à ajouter les projets au serveur, sauf le client.
+
+# Étape 3 - Run le Client
+Executez le projet MonkeysClient après avoir lancé la datasource h2 et le serveur WildFly. Normalement la fenêtre du jeu s'affiche avec les informations dans la console du serveur concernant la réception de nouveau message.
  
