@@ -149,7 +149,6 @@ public class MonkeyClient implements MessageListener, GameObserver {
 //					RumBottle[] bottles = (RumBottle[])mappedBottles.values().toArray();
 					fenetre.removeRhums();
 					for (RumBottle b : mappedBottles.values()) {
-						System.out.println(b.getX() + " " + b.getY());
 						fenetre.creationRhum(b.getX(), b.getY(), b.isVisible());
 					}
 					break;
