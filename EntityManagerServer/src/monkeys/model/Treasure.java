@@ -6,7 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Lob;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -33,6 +33,7 @@ public class Treasure implements Serializable {
 	 */
 	@Id
 	@GeneratedValue
+	@Column(name="ID")
 	public int getId() {
 		return this.id;
 	}
@@ -45,8 +46,7 @@ public class Treasure implements Serializable {
 	}
 	
 	@OneToOne
-	@Lob
-	@Column(length = 100000)
+	@JoinColumn(name="MAP_ID")
 	public void setMap(Island map) {
 		this.map = map;
 	}
@@ -55,22 +55,25 @@ public class Treasure implements Serializable {
 		return this.map;
 	}
 	
+	@Column(name="POSX")
 	public int getX() {
 		return this.x;
-	}
-	
-	public int getY() {
-		return this.y;
 	}
 	
 	public void setX(int x) {
 		this.x = x;
 	}
 	
+	@Column(name="POSY")
+	public int getY() {
+		return this.y;
+	}
+	
 	public void setY(int y) {
 		this.y = y;
 	}
 	
+	@Column(name="VISIBLE")
 	public boolean isVisible() {
 		return this.isVisible;
 	}

@@ -2,11 +2,6 @@ package monkeys.model;
 
 import java.io.Serializable;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-
-@Entity
 public class Pirate implements Serializable {
 	/**
 	 * 
@@ -24,8 +19,6 @@ public class Pirate implements Serializable {
 	/**
 	 * @return the id
 	 */
-	@Id
-	@GeneratedValue
 	public int getId() {
 		return id;
 	}

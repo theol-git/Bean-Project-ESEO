@@ -7,8 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="ISLAND")
 public class Island implements Serializable {
 	/**
 	 * 
@@ -26,6 +28,7 @@ public class Island implements Serializable {
 	 */
 	@Id
 	@GeneratedValue
+	@Column(name="ID")
 	public int getId() {
 		return id;
 	}

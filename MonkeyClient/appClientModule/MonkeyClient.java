@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Properties;
 
@@ -144,15 +145,19 @@ public class MonkeyClient implements MessageListener, GameObserver {
 					break;
 				case "bottles":
 					System.out.println("bottles");
-					RumBottle[] bottles = (RumBottle[])om.getObject();
-					for (RumBottle b : bottles) {
+					HashMap<String, RumBottle> mappedBottles = (HashMap<String, RumBottle>)om.getObject();
+//					RumBottle[] bottles = (RumBottle[])mappedBottles.values().toArray();
+					fenetre.removeRhums();
+					for (RumBottle b : mappedBottles.values()) {
+						System.out.println(b.getX() + " " + b.getY());
 						fenetre.creationRhum(b.getX(), b.getY(), b.isVisible());
 					}
 					break;
 				case "pirates":
 					System.out.println("pirates");
-					Pirate[] pirates = (Pirate[])om.getObject();
-					for (Pirate p : pirates) {
+					HashMap<String, Pirate> mappedPirates = (HashMap<String, Pirate>)om.getObject();
+//					Pirate[] pirates = (Pirate[])mappedPirates.values().toArray();
+					for (Pirate p : mappedPirates.values()) {
 						fenetre.ajoutPirate(p.getId(), p.getX(), p.getY(), "Test", 100);
 					}
 					break;

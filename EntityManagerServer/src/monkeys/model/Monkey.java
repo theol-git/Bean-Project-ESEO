@@ -2,11 +2,16 @@ package monkeys.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="MONKEY")
 public class Monkey implements Serializable {
 	/**
 	 * 
@@ -27,7 +32,8 @@ public class Monkey implements Serializable {
 	public int y;
 	
 
-	public Monkey(int x, int y, Type t) {
+	public Monkey(Island map, int x, int y, Type t) {
+		this.map = map;
 		this.x = x;
 		this.y = y;
 		this.type = t;
@@ -38,6 +44,7 @@ public class Monkey implements Serializable {
 	 */
 	@Id
 	@GeneratedValue
+	@Column(name="ID")
 	public int getId() {
 		return id;
 	}
@@ -48,37 +55,43 @@ public class Monkey implements Serializable {
 	public void setId(int id) {
 		this.id = id;
 	}
-
-	public void setMap(Island map) {
-		this.map = map;
-	}
 	
+	@ManyToOne
+	@JoinColumn(name="MAP_ID")
 	public Island getMap() {
 		return map;
 	}
 	
+	public void setMap(Island map) {
+		this.map = map;
+	}
+	
+	@Column(name="POSX")
 	public int getX() {
 		return this.x;
-	}
-	
-	public int getY() {
-		return this.y;
-	}
-	
-	public Type getType() {
-		return this.type;
-	}
-	
-	public void setType(Type t) {
-		this.type = t;
 	}
 	
 	public void setX(int x) {
 		this.x = x;
 	}
 	
+	
+	@Column(name="POSY")
+	public int getY() {
+		return this.y;
+	}
+	
 	public void setY(int y) {
 		this.y = y;
+	}
+	
+	@Column(name="TYPE")
+	public Type getType() {
+		return this.type;
+	}
+	
+	public void setType(Type t) {
+		this.type = t;
 	}
 	
 }
