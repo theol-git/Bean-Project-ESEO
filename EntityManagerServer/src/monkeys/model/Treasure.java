@@ -46,13 +46,13 @@ public class Treasure implements Serializable {
 	}
 	
 	@OneToOne
-	@JoinColumn(name="MAP_ID")
-	public void setMap(Island map) {
-		this.map = map;
-	}
-	
+	@JoinColumn(name="MAP")
 	public Island getMap() {
 		return this.map;
+	}
+	
+	public void setMap(Island map) {
+		this.map = map;
 	}
 	
 	@Column(name="POSX")
