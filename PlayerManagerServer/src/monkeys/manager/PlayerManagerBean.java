@@ -36,12 +36,12 @@ public class PlayerManagerBean implements RemotePlayerManager {
 
 	@Override
 	public void move(String id, String move) {
-		// TODO Appel à l'application
+		System.out.println("Player " + id + " is moving !");
+		rMI.moveResquest(id, move);
 	}
 	
 	private void addPlayer(String id) {
 		rMI.createMap();
-		//comm.sendIsland(null,"myMI");
 		// TODO add player rMI
 	}
 

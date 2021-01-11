@@ -1,7 +1,9 @@
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Hashtable;
+import java.util.List;
 import java.util.Properties;
 
 import javax.jms.JMSException;
@@ -36,6 +38,8 @@ public class MonkeyClient implements MessageListener, GameObserver {
 	public static MonkeyClient instance;
 	public RemotePlayerManager rPM;
 	public static Fenetre fenetre;
+	
+	private Pirate p;
 
 	/* (non-Java-doc)
 	 * @see java.lang.Object#Object()
@@ -104,6 +108,7 @@ public class MonkeyClient implements MessageListener, GameObserver {
 	@Override
 	public void notifyDisconnect() {
 		try {
+			instance.getrPM().quit(String.valueOf(instance.hashCode()));
 			this.connection.close();
 			System.exit(0);
 		
@@ -114,8 +119,8 @@ public class MonkeyClient implements MessageListener, GameObserver {
 
 	@Override
 	public void notifyMove(int arg0, int arg1) {
-		// TODO Auto-generated method stub
-		
+		System.out.println("Moving " + arg0 + " " + arg1);
+		instance.getrPM().move(String.valueOf(this.p.getId()), arg0 + " " + arg1);
 	}
 
 	@Override
@@ -146,7 +151,6 @@ public class MonkeyClient implements MessageListener, GameObserver {
 				case "bottles":
 					System.out.println("bottles");
 					HashMap<String, RumBottle> mappedBottles = (HashMap<String, RumBottle>)om.getObject();
-//					RumBottle[] bottles = (RumBottle[])mappedBottles.values().toArray();
 					fenetre.removeRhums();
 					for (RumBottle b : mappedBottles.values()) {
 						fenetre.creationRhum(b.getX(), b.getY(), b.isVisible());
@@ -155,8 +159,8 @@ public class MonkeyClient implements MessageListener, GameObserver {
 				case "pirates":
 					System.out.println("pirates");
 					HashMap<String, Pirate> mappedPirates = (HashMap<String, Pirate>)om.getObject();
-//					Pirate[] pirates = (Pirate[])mappedPirates.values().toArray();
 					for (Pirate p : mappedPirates.values()) {
+						this.p = p;
 						fenetre.ajoutPirate(p.getId(), p.getX(), p.getY(), null, 100);
 					}
 					break;
@@ -164,7 +168,8 @@ public class MonkeyClient implements MessageListener, GameObserver {
 					System.out.println("update pirate");
 					Pirate p = (Pirate)om.getObject();
 					fenetre.suppressionPirate(p.getId());
-					fenetre.ajoutPirate(p.getId(), p.getX(), p.getY(), "Test", 100);
+					fenetre.ajoutPirate(p.getId(), p.getX(), p.getY(), null, 100);
+					this.p = p;
 					break;
 				case "updateBotlle":
 					System.out.println("update bottle");

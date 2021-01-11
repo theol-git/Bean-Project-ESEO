@@ -1,5 +1,7 @@
 package monkeys.engine;
 
+import java.util.HashMap;
+
 import javax.annotation.Resource;
 import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
@@ -23,6 +25,8 @@ public class MonkeyIslandBean implements RemoteMonkeyIsland {
 	@Resource(name="ejb:/CommunicationServer/CommunicationBean!monkeys.communication.RemoteCommunication")
 	RemoteCommunication comm;
 	
+	
+	private HashMap <String, Pirate> pirates = new HashMap<>();
     /**
      * Default constructor. 
      */
@@ -59,14 +63,22 @@ public class MonkeyIslandBean implements RemoteMonkeyIsland {
 		Pirate p = new Pirate(3, 3);
 		Pirate[] pirates = {p};
 		String[] piratesIds = {String.valueOf(p.getId())};
+		this.pirates.put(String.valueOf(p.getId()), p);
 		comm.sendPirates(pirates, piratesIds);
 	}
 	
 	
 	@Override
 	public void moveResquest(String id, String move) {
-		// TODO Auto-generated method stub
-		
+		for (HashMap.Entry<String, Pirate> entry : this.pirates.entrySet()) {
+		    if(entry.getKey().equals(id)) {
+		    	int x = Integer.parseInt(move.split(" ")[0]);
+		    	int y = Integer.parseInt(move.split(" ")[1]);
+		    	entry.getValue().setX(entry.getValue().getX() + x);
+		    	entry.getValue().setY(entry.getValue().getY() + y);
+		    	comm.updatePirate(entry.getValue(), String.valueOf(entry.getValue().getId()));
+		    }
+		}
 	}
 
 	@Override
