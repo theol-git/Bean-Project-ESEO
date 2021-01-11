@@ -158,7 +158,7 @@ public class MonkeyClient implements MessageListener, GameObserver {
 					HashMap<String, Pirate> mappedPirates = (HashMap<String, Pirate>)om.getObject();
 //					Pirate[] pirates = (Pirate[])mappedPirates.values().toArray();
 					for (Pirate p : mappedPirates.values()) {
-						fenetre.ajoutPirate(p.getId(), p.getX(), p.getY(), "Test", 100);
+						fenetre.ajoutPirate(p.getId(), p.getX(), p.getY(), null, 100);
 					}
 					break;
 				case "updatePirate":
