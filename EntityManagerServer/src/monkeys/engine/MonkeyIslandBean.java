@@ -72,6 +72,10 @@ public class MonkeyIslandBean implements RemoteMonkeyIsland {
 	public void moveResquest(String id, String move) {
 		for (HashMap.Entry<String, Pirate> entry : this.pirates.entrySet()) {
 		    if(entry.getKey().equals(id)) {
+		    	/* On déplace comme cela le pirate pour le moment 
+		    	 * TODO Il reste à implémenter l'appel au composant PlayableObject & NonPlayableObject
+		    	 * Par manque de temps cela n'a pas été implémenté
+		    	 * */
 		    	int x = Integer.parseInt(move.split(" ")[0]);
 		    	int y = Integer.parseInt(move.split(" ")[1]);
 		    	entry.getValue().setX(entry.getValue().getX() + x);
@@ -83,14 +87,17 @@ public class MonkeyIslandBean implements RemoteMonkeyIsland {
 
 	@Override
 	public void addPlayer(String id) {
-		// TODO Auto-generated method stub
-		
+		Pirate p = new Pirate(3, 3);
+		this.pirates.put(String.valueOf(p.getId()), p);
 	}
 
 	@Override
 	public void removePlayer(String id) {
-		// TODO Auto-generated method stub
-		
+		for (HashMap.Entry<String, Pirate> entry : this.pirates.entrySet()) {
+		    if(entry.getKey().equals(id)) {
+		    	this.pirates.remove(entry.getKey(), entry.getValue());
+		    }
+		}
 	}
 
 }

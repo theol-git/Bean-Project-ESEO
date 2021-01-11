@@ -108,7 +108,7 @@ public class MonkeyClient implements MessageListener, GameObserver {
 	@Override
 	public void notifyDisconnect() {
 		try {
-			instance.getrPM().quit(String.valueOf(instance.hashCode()));
+			instance.getrPM().quit(String.valueOf(p.getId()));
 			this.connection.close();
 			System.exit(0);
 		

@@ -31,7 +31,7 @@ public class PlayerManagerBean implements RemotePlayerManager {
 	@Override
 	public void quit(String id) {
 		System.out.println("User " + id + " disconnected from the game !");
-		// TODO Remove player
+		rMI.removePlayer(id);
 	}
 
 	@Override
